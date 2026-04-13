@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database PPO - AMS</title>
+    <title>Database PPO - AMS (Live Update)</title>
     
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -12,60 +12,92 @@
         body { background-color: #f8f9fa; padding: 20px; font-family: 'Segoe UI', sans-serif; }
         .container-box { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 20px; }
         h2 { color: #2c3e50; font-weight: 700; margin-bottom: 25px; border-left: 5px solid #e74c3c; padding-left: 15px; }
+        
+        /* Styling Table */
         table.dataTable thead { background-color: #34495e; color: white; }
         .badge-kategori { padding: 5px 10px; border-radius: 5px; font-size: 0.85rem; font-weight: 600; display: inline-block; }
+        
+        /* Warna Badge Otomatis */
         .bg-prekursor { background-color: #ffeaa7; color: #d35400; }
         .bg-psikotropika { background-color: #fab1a0; color: #c0392b; }
         .bg-oot { background-color: #dfe6e9; color: #2d3436; }
+        .bg-default { background-color: #eee; color: #666; }
     </style>
 </head>
 <body>
 
 <div class="container container-box">
-    <h2>Daftar Produk Prekursor, Psikotropika, OOT (PPO)</h2>
+    <h2>Daftar Produk PPO - Live Database</h2>
     
-    <table id="tablePPO" class="table table-hover display" style="width:100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Produk</th>
-                <th>Kategori</th>
-                <th>Kandungan Aktif</th>
-                <th>Bentuk Sediaan</th>
-                <th>Satuan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>1</td><td>DICOM</td><td><span class="badge-kategori bg-prekursor">Prekursor</span></td><td>Pseudopehedrine 30 mg</td><td>Tablet</td><td>Box (100)</td></tr>
-            <tr><td>2</td><td>RYCOX</td><td><span class="badge-kategori bg-prekursor">Prekursor</span></td><td>Pseudopehedrine 30 mg</td><td>Sirup</td><td>Botol</td></tr>
-            <tr><td>3</td><td>RYCOX NEO</td><td><span class="badge-kategori bg-prekursor">Prekursor</span></td><td>Pseudopehedrine 30 mg</td><td>Drop</td><td>Botol</td></tr>
-            <tr><td>4</td><td>RINVELL</td><td><span class="badge-kategori bg-prekursor">Prekursor</span></td><td>Pseudopehedrine 30 mg</td><td>Injeksi</td><td>Box</td></tr>
-            <tr><td>5</td><td>FLUTAMOL CAPS</td><td><span class="badge-kategori bg-prekursor">Prekursor</span></td><td>Phenilpropanolamin</td><td>Kapsul</td><td>Box</td></tr>
-            <tr><td>6</td><td>FRIXITAS 1 MG</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Alprazolam 1 mg</td><td>Tablet</td><td>Box</td></tr>
-            <tr><td>7</td><td>FRIXITAS 0.5 MG</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Alprazolam 0.5 mg</td><td>Tablet</td><td>Box</td></tr>
-            <tr><td>8</td><td>CLONAVELL ODT</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Clonazepam</td><td>Tablet</td><td>Box</td></tr>
-            <tr><td>9</td><td>MILOZ INJEKSI 5</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Midazolam 5mg/5ml</td><td>Injeksi</td><td>Box</td></tr>
-            <tr><td>10</td><td>MILOZ INJEKSI 15</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Midazolam 15mg/3ml</td><td>Injeksi</td><td>Box</td></tr>
-            <tr><td>11</td><td>NOZEPAV 5</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Diazepam 5mg/2.5ml</td><td>Enema</td><td>Box</td></tr>
-            <tr><td>12</td><td>NOZEPAV 10</td><td><span class="badge-kategori bg-psikotropika">Psikotropika</span></td><td>Diazepam 10mg/2.5ml</td><td>Enema</td><td>Box</td></tr>
-            <tr><td>13</td><td>ACETRAM</td><td><span class="badge-kategori bg-oot">OOT</span></td><td>Tramadol 37.5 mg</td><td>Tablet</td><td>Box</td></tr>
-            <tr><td>14</td><td>ARKINE</td><td><span class="badge-kategori bg-oot">OOT</span></td><td>THP</td><td>Kaplet</td><td>Box</td></tr>
-            <tr><td>15</td><td>PINOREC PLUS</td><td><span class="badge-kategori bg-oot">OOT</span></td><td>Tramadol 37.5 mg</td><td>Tablet</td><td>Box</td></tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table id="tablePPO" class="table table-hover display" style="width:100%">
+            <thead id="tableHead">
+                </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
 <script>
+    // Link CSV Google Sheets Anda
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7HAFLR1bkCpn6Lbn6vsdHf9zkKvDIoBiyOg_bJRglu0VUHqRPUxJCR1qR2j62RD8Xtw9wrGKbV9Q2/pub?gid=0&single=true&output=csv';
+
     $(document).ready(function() {
-        $('#tablePPO').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
-            },
-            "pageLength": 15,
-            "responsive": true
+        Papa.parse(sheetUrl, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                const data = results.data;
+                const columns = results.meta.fields; // Mengambil nama kolom dari baris pertama sheet
+
+                // 1. Generate Header Tabel secara dinamis
+                let headerHtml = '<tr>';
+                columns.forEach(col => {
+                    headerHtml += `<th>${col}</th>`;
+                });
+                headerHtml += '</tr>';
+                $('#tableHead').html(headerHtml);
+
+                // 2. Generate Isi Tabel
+                let bodyHtml = '';
+                data.forEach(row => {
+                    bodyHtml += '<tr>';
+                    columns.forEach(col => {
+                        let cellValue = row[col] || '';
+                        
+                        // Logika Khusus: Jika kolom adalah 'Kategori', bungkus dengan Badge
+                        if (col.toLowerCase() === 'kategori') {
+                            let badgeClass = 'bg-default';
+                            let val = cellValue.toLowerCase();
+                            if (val.includes('prekursor')) badgeClass = 'bg-prekursor';
+                            else if (val.includes('psikotropika')) badgeClass = 'bg-psikotropika';
+                            else if (val.includes('oot')) badgeClass = 'bg-oot';
+                            
+                            bodyHtml += `<td><span class="badge-kategori ${badgeClass}">${cellValue}</span></td>`;
+                        } else {
+                            bodyHtml += `<td>${cellValue}</td>`;
+                        }
+                    });
+                    bodyHtml += '</tr>';
+                });
+                $('#tableBody').html(bodyHtml);
+
+                // 3. Inisialisasi DataTable
+                $('#tablePPO').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+                    },
+                    "pageLength": 10,
+                    "responsive": true,
+                    "order": [[0, 'asc']]
+                });
+            }
         });
     });
 </script>
